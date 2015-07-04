@@ -8,5 +8,73 @@ output: html_document
 Documentatin for the ecbSDW2R functions. 
 
 
+Description of the public ECB SDW API: <https://sdw-wsrest.ecb.europa.eu/>
 
-Blablabla Texttexttext!
+
+## Load packages
+
+ library(XML)
+ library(RCurl)
+
+* For a tutorial on XML and parsing XML documents, read this: <http://www.w3schools.com/xpath/default.asp>
+* An introduction to the XML package can be found here: <http://www.omegahat.org/RSXML/shortIntro.pdf>
+* The RCurl package is used to send the request to the server in order to retrieve the data.
+
+
+library(rsdmx) for getting the sdmx returned by the SDW into a data frame
+
+library(stringr) for cutting strings -- use later
+
+
+## Construct the appropriate REST query
+
+* First read this: <https://sdw-wsrest.ecb.europa.eu/documentation/index.jsp>
+* <https://github.com/sdmx-twg/sdmx-rest/wiki/Tips-for-consumers>
+
+All the data stored in the Statistical Data Warehouse can be retrieved using the query string described below.
+ 
+protocol://wsEntryPoint/resource/flowRef/key?parameters
+
+where parameters are defined as such:
+
+startPeriod=value&endPeriod=value&updatedAfter=value&firstNObservations=value&lastNObservations=value&detail=value&includeHistory=value
+
+
+Examples:
+
+* <https://sdw-wsrest.ecb.europa.eu/service/data/EXR/M.USD+GBP+JPY.EUR.SP00.A?updatedAfter=2009-05-15T14%3A15%3A00%2B01%3A00>
+* <https://sdw-wsrest.ecb.europa.eu/service/data/EXR/D.USD.EUR.SP00.A?startPeriod=2009-05-01&endPeriod=2009-05-31>
+
+
+
+
+===old===
+
+# Step 2: Make the request using cURL (that is, retrieve the data)
+
+For information about cURL, read this: http://curl.haxx.se/
+For information about the curl command, check out the man pages: http://curl.haxx.se/docs/manpage.html
+
+command   <- paste("curl", rest_query)
+raw_data  <- system(command, intern=TRUE)  #JR: doesn't seem to work
+
+An alternative method is to use getURL() from the RCurl package.
+
+raw_data <- getURL(rest_query)
+
+Note: at this stage, the data is a character object.
+
+class(raw_data)
+
+Step 3: Parse the data
+Here we use functions from the XML package - one could, of course, use base package functions, but why?
+
+data <- xmlParse(raw_data)
+
+Parsing the data returns an object of class: "XMLInternalDocument" and "XMLAbstractDocument"
+
+class(data)
+
+===
+
+
