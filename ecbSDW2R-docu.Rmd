@@ -1,0 +1,12 @@
+---
+title: "Documentation"
+author: "Jörg Reddig"
+date: "Saturday, July 04, 2015"
+output: html_document
+---
+
+Documentatin for the ecbSDW2R functions. 
+
+
+
+Blablabla Texttexttext!
