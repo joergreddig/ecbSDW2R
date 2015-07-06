@@ -54,11 +54,10 @@ split.series.key <- function(series.key) {
 
 # str_replace(string, regular expression, replacement string) -- replaces the first matched pattern and returns a character vector #str_replace(series.key, regex, "")
 
-series.key.elements <- split.series.key(series.key)
 
 
 
-# Step 1: Construct the appropriate REST query.
+# Construct the appropriate REST query.
 
 sdw.query <- function (series.key.elements) {
   
@@ -78,18 +77,39 @@ sdw.query <- function (series.key.elements) {
 
 
 
+get.sdw.series <- function(series.key) {
+  
+  series.key.elements <- split.series.key(series.key)
+  
+  sdmx <- sdw.query(series.key.elements)
+  
+  # Extract the numerical data 
+  retrieved.data <- as.data.frame(sdmx)
+  
+  retrieved.data <- retrieved.data[, c("obsTime", "obsValue")]
+}
 
-# Extract the numerical data 
-stats <- as.data.frame(sdmx)
 
 
-stats <- stats[, c("obsTime", "obsValue")]
+
 
 colnames(stats)[2] <- paste(series.key)
 
+plot(stats)
 
 
 
+
+series.keys <- c("IVF.Q.U2.N.10.A30.A.1.Z5.0000.Z01.E", "IVF.Q.U2.N.20.A30.A.1.Z5.0000.Z01.E", "IVF.Q.U2.N.20.A30.A.1.Z5.0000.Z01.E")
+
+
+
+for(i in series.keys){
+  get.sdw.series(i)
+  
+  #mehrere reihen herunterladen und all in einen data frame reinstecken mit dem Namen der series als colName. 
+  
+}
 
 
 
@@ -99,11 +119,16 @@ plot.ts(stats$obsValue)
 m3growth <- stats[ , c("obsTime", "obsValue")]
 
 
+ggplot(stats, aes(x=obsTime, y=obsValue)) + geom_line() + scale_x_date(format = "%b-%Y")
+
+
+
 library(zoo)
-stats$ObsTime <- read.zoo(stats$ObsTime, FUN = as.yearmon)
+stats$obsTime <- read.zoo(stats$obsTime, FUN = as.yearmon)
 
 stats$m3growth <- as.Date(stats$m3growth, format="%Y-%m")
 
+stats$obsValue <- as.Date(stats$obsValue, format="%Y-%m")
 
 m3 <- as.xts(m3growth)
 

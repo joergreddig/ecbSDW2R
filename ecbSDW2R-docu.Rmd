@@ -50,7 +50,7 @@ Examples:
 
 ===old===
 
-# Step 2: Make the request using cURL (that is, retrieve the data)
+## Make the request using cURL (that is, retrieve the data)
 
 For information about cURL, read this: http://curl.haxx.se/
 For information about the curl command, check out the man pages: http://curl.haxx.se/docs/manpage.html
