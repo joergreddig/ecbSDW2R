@@ -7,6 +7,18 @@ output: html_document
 
 Documentatin for the ecbSDW2R functions. 
 
+# TODO(JR): 
+
+* download multiple time series into one data frame; check if all have same frequency
+* function should allow for options from ECB SDW API and Wildcards
+* for time series function: determine automatically whether a series is m or q!
+* make a package on Github!
+* 
+
+
+
+
+
 
 Description of the public ECB SDW API: <https://sdw-wsrest.ecb.europa.eu/>
 
@@ -45,7 +57,7 @@ Examples:
 * <https://sdw-wsrest.ecb.europa.eu/service/data/EXR/M.USD+GBP+JPY.EUR.SP00.A?updatedAfter=2009-05-15T14%3A15%3A00%2B01%3A00>
 * <https://sdw-wsrest.ecb.europa.eu/service/data/EXR/D.USD.EUR.SP00.A?startPeriod=2009-05-01&endPeriod=2009-05-31>
 
-
+confidential data cannot be downloaded via the (internal) SDW API
 
 
 ===old===
