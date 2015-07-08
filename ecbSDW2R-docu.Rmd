@@ -13,7 +13,7 @@ Documentatin for the ecbSDW2R functions.
 * function should allow for options from ECB SDW API and Wildcards
 * for time series function: determine automatically whether a series is m or q!
 * make a package on Github!
-* 
+* sdw.print function to directly print series via ggplot2
 
 
 
@@ -59,6 +59,10 @@ Examples:
 
 confidential data cannot be downloaded via the (internal) SDW API
 
+
+http://www.inside-r.org/packages/cran/zoo/docs/as.yearmon
+http://stackoverflow.com/questions/6242955/converting-year-and-month-to-a-date-in-r
+http://timelyportfolio.github.io/rCharts_time_series/history.html
 
 ===old===
 

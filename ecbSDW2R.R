@@ -2,7 +2,7 @@
 ## Joerg Reddig
 ## 21.4.2015
 ## ecbSDW2R
-## Last Change: 7.7.2015 
+## Last Change: 8.7.2015 
 ##===============================
 
 # Github: https://github.com/joergreddig/ecbSDW2R
